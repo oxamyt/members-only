@@ -1,19 +1,19 @@
 const { Router } = require("express");
 const userController = require("../controllers/userController");
-const { signupValidation } = require("./path/to/validation");
-const { validate } = require("./path/to/validate");
+const { validate } = require("../utils/validate");
+const { signupValidation } = require("../utils/validators");
 
 const userRouter = Router();
 
-userRouter.get("/", userController.homepageGet);
+userRouter.get("/", userController.getHomepage);
 
-userRouter.get("/sign-up", userController.signupFormGet);
+userRouter.get("/sign-up", userController.getSignUpForm);
 
 userRouter.post(
   "/sign-up",
   signupValidation,
   validate,
-  userController.signupFormPost
+  userController.postSignUpForm
 );
 
 module.exports = userRouter;
