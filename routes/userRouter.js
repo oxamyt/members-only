@@ -16,4 +16,6 @@ userRouter.post(
   userController.postSignUpForm
 );
 
+userRouter.get("/login", userController.getLoginForm);
+
 module.exports = userRouter;

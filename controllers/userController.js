@@ -48,8 +48,17 @@ async function postSignUpForm(req, res) {
   }
 }
 
+async function getLoginForm(req, res) {
+  try {
+    res.render("login");
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 module.exports = {
   getHomepage,
   getSignUpForm,
   postSignUpForm,
+  getLoginForm,
 };
