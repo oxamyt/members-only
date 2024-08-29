@@ -1,10 +1,11 @@
 const db = require("../db/queries");
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
+const passport = require("../utils/passportConfig");
 
 async function getHomepage(req, res) {
   try {
-    res.render("homepage");
+    res.render("homepage", { user: req.user });
   } catch (err) {
     console.error(err);
   }
@@ -56,9 +57,22 @@ async function getLoginForm(req, res) {
   }
 }
 
+async function postLoginForm(req, res, next) {
+  passport.authenticate("local", (err, user, info) => {
+    if (err) return next(err);
+    if (!user) return res.redirect("/login");
+
+    req.logIn(user, (err) => {
+      if (err) return next(err);
+      return res.redirect("/");
+    });
+  })(req, res, next);
+}
+
 module.exports = {
   getHomepage,
   getSignUpForm,
   postSignUpForm,
   getLoginForm,
+  postLoginForm,
 };

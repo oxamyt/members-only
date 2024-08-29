@@ -18,4 +18,6 @@ userRouter.post(
 
 userRouter.get("/login", userController.getLoginForm);
 
+userRouter.post("/login", userController.postLoginForm);
+
 module.exports = userRouter;

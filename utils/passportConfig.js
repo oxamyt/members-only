@@ -3,8 +3,11 @@ const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcryptjs");
 const pool = require("../db/pool");
 
+console.log("Passport.js loaded");
+
 passport.use(
   new LocalStrategy(async (username, password, done) => {
+    console.log("LocalStrategy called");
     try {
       const { rows } = await pool.query(
         "SELECT * FROM users WHERE username = $1",
@@ -29,10 +32,12 @@ passport.use(
 );
 
 passport.serializeUser((user, done) => {
+  console.log("Serialize User");
   done(null, user.id);
 });
 
 passport.deserializeUser(async (id, done) => {
+  console.log("Deserialize User");
   try {
     const { rows } = await pool.query("SELECT * FROM users WHERE id = $1", [
       id,
@@ -44,3 +49,5 @@ passport.deserializeUser(async (id, done) => {
     done(err);
   }
 });
+
+module.exports = passport;
