@@ -2,26 +2,33 @@ const db = require("../db/queries");
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const passport = require("../utils/passportConfig");
+require("dotenv").config();
+
+async function handleError(
+  res,
+  err,
+  statusCode = 500,
+  message = "Server error."
+) {
+  console.error(err);
+  res.status(statusCode).send(message);
+}
 
 async function getHomepage(req, res) {
   try {
     res.render("homepage", { user: req.user });
   } catch (err) {
-    console.error(err);
+    handleError(res, err);
   }
 }
 
 async function getSignUpForm(req, res) {
-  try {
-    res.render("sign-up-form", {
-      first_name: "",
-      last_name: "",
-      username: "",
-      errors: [],
-    });
-  } catch (err) {
-    console.error(err);
-  }
+  res.render("sign-up-form", {
+    first_name: "",
+    last_name: "",
+    username: "",
+    errors: [],
+  });
 }
 
 async function postSignUpForm(req, res) {
@@ -39,34 +46,44 @@ async function postSignUpForm(req, res) {
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-
     await db.insertUser(first_name, last_name, username, hashedPassword);
-
     res.redirect("/");
   } catch (err) {
-    console.error(err);
-    res.status(500).send("Server error.");
+    handleError(res, err);
   }
 }
 
 async function getLoginForm(req, res) {
-  try {
-    res.render("login");
-  } catch (err) {
-    console.error(err);
-  }
+  res.render("login");
 }
 
-async function postLoginForm(req, res, next) {
-  passport.authenticate("local", (err, user, info) => {
+async function getLogout(req, res, next) {
+  req.logout((err) => {
     if (err) return next(err);
-    if (!user) return res.redirect("/login");
+    res.redirect("/");
+  });
+}
 
-    req.logIn(user, (err) => {
-      if (err) return next(err);
-      return res.redirect("/");
+async function getMembershipForm(req, res) {
+  res.render("update-membership", { errors: [] });
+}
+
+async function postMembershipForm(req, res) {
+  const { passcode } = req.body;
+
+  if (passcode !== process.env.SECRET_PASSCODE) {
+    return res.status(400).render("update-membership", {
+      errors: [{ msg: "Incorrect passcode." }],
     });
-  })(req, res, next);
+  }
+
+  try {
+    await db.updateMembershipStatus(req.user.id);
+    res.redirect("/");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server error");
+  }
 }
 
 module.exports = {
@@ -74,5 +91,7 @@ module.exports = {
   getSignUpForm,
   postSignUpForm,
   getLoginForm,
-  postLoginForm,
+  getLogout,
+  getMembershipForm,
+  postMembershipForm,
 };
