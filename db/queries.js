@@ -23,8 +23,20 @@ async function insertNewMessage(title, text, userId, timestamp) {
   await pool.query(insertQuery, values);
 }
 
+async function getMessages() {
+  const getQuery = `
+    SELECT messages.title, messages.text, messages.timestamp, users.username AS author
+    FROM messages
+    INNER JOIN users ON messages.user_id = users.id
+  `;
+
+  const result = await pool.query(getQuery);
+  return result.rows;
+}
+
 module.exports = {
   insertUser,
   updateMembershipStatus,
   insertNewMessage,
+  getMessages,
 };

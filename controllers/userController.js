@@ -1,7 +1,6 @@
 const db = require("../db/queries");
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
-const passport = require("../utils/passportConfig");
 require("dotenv").config();
 
 async function handleError(
@@ -16,7 +15,8 @@ async function handleError(
 
 async function getHomepage(req, res) {
   try {
-    res.render("homepage", { user: req.user });
+    const messages = await db.getMessages();
+    res.render("homepage", { user: req.user, messages: messages });
   } catch (err) {
     handleError(res, err);
   }

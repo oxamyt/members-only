@@ -8,13 +8,13 @@
   <body>
     <h1>Homepage</h1>
     <a href="/sign-up">Sign up</a>
-    <% if (user) {%>
+    <% if (user) { %>
     <h1>WELCOME BACK <%= user.username %></h1>
     <a href="/logout">LOG OUT</a>
     <a href="/update-membership">UPDATE MEMBERSHIP STATUS</a>
     <a href="/new-message">CREATE NEW MESSAGE</a>
     <% } else { %>
-    <h1>please log in</h1>
+    <h1>Please log in</h1>
     <form action="/login" method="POST">
       <label for="username">Username</label>
       <input id="username" name="username" placeholder="username" type="text" />
@@ -22,6 +22,22 @@
       <input id="password" name="password" type="password" />
       <button>Log In</button>
     </form>
-    <%}%>
+    <% } %> <% if (messages && messages.length > 0) { %>
+    <ul>
+      <% messages.forEach(message => { %>
+      <li>
+        <p><%= message.title %></p>
+
+        <%= message.text %>
+        <p>
+          By: <%= user ? message.author : 'Anonymous' %> on <%= user ?
+          message.timestamp.toLocaleString() : 'Unknown time' %>
+        </p>
+      </li>
+      <% }) %>
+    </ul>
+    <% } else { %>
+    <p>No messages found.</p>
+    <% } %>
   </body>
 </html>
