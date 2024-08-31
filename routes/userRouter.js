@@ -42,4 +42,16 @@ userRouter.post(
   userController.postMembershipForm
 );
 
+userRouter.get(
+  "/new-message",
+  checkAuthenticated,
+  userController.getNewMessageForm
+);
+
+userRouter.post(
+  "/new-message",
+  checkAuthenticated,
+  userController.postNewMessageForm
+);
+
 module.exports = userRouter;

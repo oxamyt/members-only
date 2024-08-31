@@ -86,6 +86,22 @@ async function postMembershipForm(req, res) {
   }
 }
 
+async function getNewMessageForm(req, res) {
+  res.render("new-message-form");
+}
+
+async function postNewMessageForm(req, res) {
+  const { title, text } = req.body;
+
+  try {
+    const timestamp = new Date();
+    await db.insertNewMessage(title, text, req.user.id, timestamp);
+    res.redirect("/");
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 module.exports = {
   getHomepage,
   getSignUpForm,
@@ -94,4 +110,6 @@ module.exports = {
   getLogout,
   getMembershipForm,
   postMembershipForm,
+  getNewMessageForm,
+  postNewMessageForm,
 };
