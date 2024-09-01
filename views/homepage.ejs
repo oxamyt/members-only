@@ -33,6 +33,9 @@
           By: <%= user ? message.author : 'Anonymous' %> on <%= user ?
           message.timestamp.toLocaleString() : 'Unknown time' %>
         </p>
+        <form action="/<%= message.id %>/delete" method="post">
+          <button type="submit">Delete message</button>
+        </form>
       </li>
       <% }) %>
     </ul>

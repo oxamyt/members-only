@@ -81,8 +81,7 @@ async function postMembershipForm(req, res) {
     await db.updateMembershipStatus(req.user.id);
     res.redirect("/");
   } catch (err) {
-    console.error(err);
-    res.status(500).send("Server error");
+    handleError(res, err);
   }
 }
 
@@ -98,7 +97,18 @@ async function postNewMessageForm(req, res) {
     await db.insertNewMessage(title, text, req.user.id, timestamp);
     res.redirect("/");
   } catch (err) {
-    console.error(err);
+    handleError(res, err);
+  }
+}
+
+async function postDeleteMessage(req, res) {
+  const id = req.params.id;
+
+  try {
+    await db.deleteMessageById(id);
+    res.redirect("/");
+  } catch (err) {
+    handleError(res, err);
   }
 }
 
@@ -112,4 +122,5 @@ module.exports = {
   postMembershipForm,
   getNewMessageForm,
   postNewMessageForm,
+  postDeleteMessage,
 };

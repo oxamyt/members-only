@@ -54,4 +54,6 @@ userRouter.post(
   userController.postNewMessageForm
 );
 
+userRouter.post("/:id/delete", userController.postDeleteMessage);
+
 module.exports = userRouter;

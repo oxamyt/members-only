@@ -25,7 +25,7 @@ async function insertNewMessage(title, text, userId, timestamp) {
 
 async function getMessages() {
   const getQuery = `
-    SELECT messages.title, messages.text, messages.timestamp, users.username AS author
+    SELECT messages.id, messages.title, messages.text, messages.timestamp, users.username AS author
     FROM messages
     INNER JOIN users ON messages.user_id = users.id
   `;
@@ -34,9 +34,15 @@ async function getMessages() {
   return result.rows;
 }
 
+async function deleteMessageById(id) {
+  const deleteQuery = `DELETE FROM messages WHERE id = $1`;
+  await pool.query(deleteQuery, [id]);
+}
+
 module.exports = {
   insertUser,
   updateMembershipStatus,
   insertNewMessage,
   getMessages,
+  deleteMessageById,
 };
