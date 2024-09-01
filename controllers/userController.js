@@ -112,6 +112,27 @@ async function postDeleteMessage(req, res) {
   }
 }
 
+async function getAdminStatus(req, res) {
+  res.render("update-admin", { errors: [] });
+}
+
+async function postAdminStatus(req, res) {
+  const { passcode } = req.body;
+
+  if (passcode !== process.env.SECRET_ADMIN_PASSCODE) {
+    return res.status(400).render("update-admin", {
+      errors: [{ msg: "Incorrect passcode." }],
+    });
+  }
+
+  try {
+    await db.updateAdminStatus(req.user.id);
+    res.redirect("/");
+  } catch (err) {
+    handleError(res, err);
+  }
+}
+
 module.exports = {
   getHomepage,
   getSignUpForm,
@@ -123,4 +144,6 @@ module.exports = {
   getNewMessageForm,
   postNewMessageForm,
   postDeleteMessage,
+  getAdminStatus,
+  postAdminStatus,
 };

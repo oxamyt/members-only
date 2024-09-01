@@ -12,6 +12,7 @@
     <h1>WELCOME BACK <%= user.username %></h1>
     <a href="/logout">LOG OUT</a>
     <a href="/update-membership">UPDATE MEMBERSHIP STATUS</a>
+    <a href="/update-admin">UPDATE ADMIN STATUS</a>
     <a href="/new-message">CREATE NEW MESSAGE</a>
     <% } else { %>
     <h1>Please log in</h1>
@@ -27,15 +28,18 @@
       <% messages.forEach(message => { %>
       <li>
         <p><%= message.title %></p>
-
-        <%= message.text %>
+        <p><%= message.text %></p>
         <p>
-          By: <%= user ? message.author : 'Anonymous' %> on <%= user ?
-          message.timestamp.toLocaleString() : 'Unknown time' %>
+          <% if (user && user.membership_status) { %> By: <%= message.author %>
+          on <%= message.timestamp.toLocaleString() %> <% } else { %> By:
+          Anonymous on Unknown time <% } %>
         </p>
+
+        <% if (user && user.is_admin) { %>
         <form action="/<%= message.id %>/delete" method="post">
           <button type="submit">Delete message</button>
         </form>
+        <% } %>
       </li>
       <% }) %>
     </ul>

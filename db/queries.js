@@ -15,6 +15,13 @@ async function updateMembershipStatus(userId) {
   await pool.query(updateQuery, values);
 }
 
+async function updateAdminStatus(userId) {
+  const updateQuery = "UPDATE users SET is_admin = true WHERE id = $1";
+  const values = [userId];
+
+  await pool.query(updateQuery, values);
+}
+
 async function insertNewMessage(title, text, userId, timestamp) {
   const insertQuery =
     "INSERT INTO messages (user_id,title,timestamp,text) VALUES ($1,$2,$3,$4)";
@@ -45,4 +52,5 @@ module.exports = {
   insertNewMessage,
   getMessages,
   deleteMessageById,
+  updateAdminStatus,
 };

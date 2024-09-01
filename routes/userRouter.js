@@ -4,6 +4,7 @@ const { validate } = require("../utils/validate");
 const { signupValidation } = require("../utils/validators");
 const passport = require("../utils/passportConfig");
 const checkAuthenticated = require("../utils/checkAuthenticated");
+const checkAdmin = require("../utils/checkAdmin");
 
 const userRouter = Router();
 
@@ -54,6 +55,23 @@ userRouter.post(
   userController.postNewMessageForm
 );
 
-userRouter.post("/:id/delete", userController.postDeleteMessage);
+userRouter.post(
+  "/:id/delete",
+  checkAuthenticated,
+  checkAdmin,
+  userController.postDeleteMessage
+);
+
+userRouter.get(
+  "/update-admin",
+  checkAuthenticated,
+  userController.getAdminStatus
+);
+
+userRouter.post(
+  "/update-admin",
+  checkAuthenticated,
+  userController.postAdminStatus
+);
 
 module.exports = userRouter;
