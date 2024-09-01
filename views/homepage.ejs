@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Homepage</title>
+    <link rel="stylesheet" href="/stylesheets/styles.css"
   </head>
   <body>
     <h1>Homepage</h1>
@@ -30,9 +31,9 @@
         <p><%= message.title %></p>
         <p><%= message.text %></p>
         <p>
-          <% if (user && user.membership_status) { %> By: <%= message.author %>
-          on <%= message.timestamp.toLocaleString() %> <% } else { %> By:
-          Anonymous on Unknown time <% } %>
+          <% if (user && (user.membership_status || user.is_admin) ) { %> By:
+          <%= message.author %> on <%= message.timestamp.toLocaleString() %> <%
+          } else { %> By: Anonymous on Unknown time <% } %>
         </p>
 
         <% if (user && user.is_admin) { %>
