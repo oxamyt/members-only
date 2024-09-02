@@ -65,5 +65,33 @@ ul {
   src: url(../fonts/Montserrat-Regular.ttf);
 }
 
+:root {
+  --main-font-color: #ffffff;
+}
+
 @media only screen and (min-width: 320px) and (max-width: 766px) {
+  .header {
+    background: linear-gradient(#2eafc3, #43b6c8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--main-font-color);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    position: relative;
+  }
+
+  .header-section {
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+  }
+
+  .svg {
+    margin-left: auto;
+    width: 3rem;
+  }
 }

@@ -7,45 +7,31 @@
     <link rel="stylesheet" href="/stylesheets/styles.css"
   </head>
   <body>
-    <h1>Homepage</h1>
-    <a href="/sign-up">Sign up</a>
-    <% if (user) { %>
-    <h1>WELCOME BACK <%= user.username %></h1>
-    <a href="/logout">LOG OUT</a>
-    <a href="/update-membership">UPDATE MEMBERSHIP STATUS</a>
-    <a href="/update-admin">UPDATE ADMIN STATUS</a>
-    <a href="/new-message">CREATE NEW MESSAGE</a>
-    <% } else { %>
-    <h1>Please log in</h1>
-    <form action="/login" method="POST">
-      <label for="username">Username</label>
-      <input id="username" name="username" placeholder="username" type="text" />
-      <label for="password">Password</label>
-      <input id="password" name="password" type="password" />
-      <button>Log In</button>
-    </form>
-    <% } %> <% if (messages && messages.length > 0) { %>
-    <ul>
-      <% messages.forEach(message => { %>
-      <li>
-        <p><%= message.title %></p>
-        <p><%= message.text %></p>
-        <p>
-          <% if (user && (user.membership_status || user.is_admin) ) { %> By:
-          <%= message.author %> on <%= message.timestamp.toLocaleString() %> <%
-          } else { %> By: Anonymous on Unknown time <% } %>
-        </p>
-
-        <% if (user && user.is_admin) { %>
-        <form action="/<%= message.id %>/delete" method="post">
-          <button type="submit">Delete message</button>
+    <div class="container">
+      <%- include('partials/header') %>
+      <main class="main">
+        <% if (user) { %>
+        <h1>WELCOME BACK <%= user.username %></h1>
+        <a href="/logout">LOG OUT</a>
+        <a href="/update-membership">UPDATE MEMBERSHIP STATUS</a>
+        <a href="/update-admin">UPDATE ADMIN STATUS</a>
+        <a href="/new-message">CREATE NEW MESSAGE</a>
+        <% } else { %>
+        <h1>Please log in</h1>
+        <form action="/login" method="POST">
+          <label for="username">Username</label>
+          <input
+            id="username"
+            name="username"
+            placeholder="username"
+            type="text"
+          />
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" />
+          <button>Log In</button>
         </form>
         <% } %>
-      </li>
-      <% }) %>
-    </ul>
-    <% } else { %>
-    <p>No messages found.</p>
-    <% } %>
+      </main>
+    </div>
   </body>
 </html>

@@ -1,0 +1,23 @@
+<% if (messages && messages.length > 0) { %>
+<ul>
+  <% messages.forEach(message => { %>
+  <li>
+    <p><%= message.title %></p>
+    <p><%= message.text %></p>
+    <p>
+      <% if (user && (user.membership_status || user.is_admin) ) { %> By: <%=
+      message.author %> on <%= message.timestamp.toLocaleString() %> <% } else {
+      %> By: Anonymous on Unknown time <% } %>
+    </p>
+
+    <% if (user && user.is_admin) { %>
+    <form action="/<%= message.id %>/delete" method="post">
+      <button type="submit">Delete message</button>
+    </form>
+    <% } %>
+  </li>
+  <% }) %>
+</ul>
+<% } else { %>
+<p>No messages found.</p>
+<% } %>
