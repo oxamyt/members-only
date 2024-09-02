@@ -4,56 +4,75 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign Up Form</title>
+    <link rel="stylesheet" href="/stylesheets/styles.css" />
   </head>
   <body>
-    <form action="/sign-up" method="post">
-      <% if (errors) { %>
-      <ul>
-        <% errors.forEach(error => { %>
-        <li><%= error.msg %></li>
-        <% }) %>
-      </ul>
-      <% } %>
+    <div class="container">
+      <%- include('partials/header') %>
+      <main class="main">
+        <form class="message-form" action="/sign-up" method="post">
+          <% if (errors) { %>
+          <ul>
+            <% errors.forEach(error => { %>
+            <li class="error"><%= error.msg %></li>
+            <% }) %>
+          </ul>
+          <% } %>
 
-      <label for="first_name">First Name:</label>
-      <input
-        type="text"
-        id="first_name"
-        name="first_name"
-        value="<%= first_name || '' %>"
-        required
-      />
+          <label class="form-label" for="first_name">First Name:</label>
+          <input
+            class="form-input"
+            type="text"
+            id="first_name"
+            name="first_name"
+            value="<%= first_name || '' %>"
+            required
+          />
 
-      <label for="last_name">Last Name:</label>
-      <input
-        type="text"
-        id="last_name"
-        name="last_name"
-        value="<%= last_name || '' %>"
-        required
-      />
+          <label class="form-label" for="last_name">Last Name:</label>
+          <input
+            class="form-input"
+            type="text"
+            id="last_name"
+            name="last_name"
+            value="<%= last_name || '' %>"
+            required
+          />
 
-      <label for="username">Username:</label>
-      <input
-        type="text"
-        id="username"
-        name="username"
-        value="<%= username || '' %>"
-        required
-      />
+          <label class="form-label" for="username">Username:</label>
+          <input
+            class="form-input"
+            type="text"
+            id="username"
+            name="username"
+            value="<%= username || '' %>"
+            required
+          />
 
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required />
+          <label class="form-label" for="password">Password:</label>
+          <input
+            class="form-input"
+            type="password"
+            id="password"
+            name="password"
+            required
+          />
 
-      <label for="confirm_password">Confirm Password:</label>
-      <input
-        type="password"
-        id="confirm_password"
-        name="confirm_password"
-        required
-      />
+          <label class="form-label" for="confirm_password"
+            >Confirm Password:</label
+          >
+          <input
+            class="form-input"
+            type="password"
+            id="confirm_password"
+            name="confirm_password"
+            required
+          />
 
-      <button type="submit">Submit</button>
-    </form>
+          <button class="submit-btn" type="submit">Submit</button>
+        </form>
+      </main>
+    </div>
+    <script src="./javascript/dropdown.js" defer></script>
   </body>
 </html>
