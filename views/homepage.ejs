@@ -11,27 +11,23 @@
       <%- include('partials/header') %>
       <main class="main">
         <% if (user) { %>
-        <h1>WELCOME BACK <%= user.username %></h1>
-        <a href="/logout">LOG OUT</a>
-        <a href="/update-membership">UPDATE MEMBERSHIP STATUS</a>
-        <a href="/update-admin">UPDATE ADMIN STATUS</a>
-        <a href="/new-message">CREATE NEW MESSAGE</a>
+        <section class="welcome">
+          <h1 class="heading">Welcome back <%= user.username %></h1>
+          <a class="new-message-btn" href="/new-message">Create new message</a>
+          <a class="logout-btn" href="/logout">Log Out</a>
+        </section>
         <% } else { %>
-        <h1>Please log in</h1>
-        <form action="/login" method="POST">
-          <label for="username">Username</label>
-          <input
-            id="username"
-            name="username"
-            placeholder="username"
-            type="text"
-          />
-          <label for="password">Password</label>
-          <input id="password" name="password" type="password" />
-          <button>Log In</button>
-        </form>
+        <section class="welcome">
+          <h1 class="heading">Welcome to Members Only!</h1>
+          <a class="sign-up-btn" href="/sign-up">Sign Up</a>
+          <p class="welcome-text">
+            Already have an account?
+            <a class="login-btn" href="/login">Login</a>
+          </p>
+        </section>
         <% } %>
       </main>
     </div>
+    <script src="./javascript/dropdown.js" defer></script>
   </body>
 </html>

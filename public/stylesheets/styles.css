@@ -4,6 +4,7 @@ html {
 body {
   min-height: 100%;
   font-family: "Montserrat", "sans-serif";
+  font-weight: normal;
 }
 
 *,
@@ -63,13 +64,48 @@ ul {
 @font-face {
   font-family: Montserrat;
   src: url(../fonts/Montserrat-Regular.ttf);
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Montserrat Bold";
+  src: url(../fonts/Montserrat-Bold.ttf);
+  font-weight: bold;
 }
 
 :root {
   --main-font-color: #ffffff;
+  --alternative-font-color: #333;
+  --main-background-color: #00aeff;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: none;
+  z-index: 10;
+}
+
+.show {
+  display: block;
+}
+
+.svg {
+  cursor: pointer;
 }
 
 @media only screen and (min-width: 320px) and (max-width: 766px) {
+  .container {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100vh;
+  }
+
   .header {
     background: linear-gradient(#2eafc3, #43b6c8);
     display: flex;
@@ -90,8 +126,79 @@ ul {
     width: max-content;
   }
 
+  .dropdown-item {
+    display: block;
+    padding: 10px 15px;
+    color: var(--alternative-font-color);
+    text-decoration: none;
+    font-size: 1rem;
+  }
+
   .svg {
     margin-left: auto;
     width: 3rem;
+  }
+
+  .main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: slidein 0.4s;
+  }
+
+  @keyframes slidein {
+    from {
+      transform: translateY(-40px);
+      opacity: 0.3;
+    }
+
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .heading {
+    font-size: 1.5rem;
+  }
+
+  .sign-up-btn {
+    font-size: 1.2rem;
+    padding: 1rem;
+    background-color: var(--main-background-color);
+    color: var(--main-font-color);
+    font-weight: bold;
+    border-radius: 12px;
+    font-family: "Montserrat Bold";
+  }
+
+  .login-btn {
+    color: #2231ff;
+    font-weight: bold;
+    font-family: "Montserrat Bold";
+  }
+
+  .new-message-btn {
+    background-color: var(--main-background-color);
+    color: var(--main-font-color);
+    font-weight: bold;
+    font-family: "Montserrat Bold";
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  .logout-btn {
+    font-family: "Montserrat Bold";
+    padding: 1rem;
+    border-radius: 12px;
+    color: var(--main-font-color);
+    background-color: #b30e0e;
   }
 }
