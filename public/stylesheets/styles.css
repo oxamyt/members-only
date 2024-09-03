@@ -1,10 +1,11 @@
-html {
-  height: 100%;
-}
+html,
 body {
-  min-height: 100%;
-  font-family: "Montserrat", "sans-serif";
+  height: 100%;
+  font-family: "Montserrat", sans-serif;
   font-weight: normal;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
 }
 
 *,
@@ -12,13 +13,7 @@ body {
 *::after {
   box-sizing: border-box;
 }
-* {
-  margin: 0;
-}
-body {
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-}
+
 img,
 picture,
 video,
@@ -27,12 +22,14 @@ svg {
   display: block;
   max-width: 100%;
 }
+
 input,
 button,
 textarea,
 select {
   font: inherit;
 }
+
 p,
 h1,
 h2,
@@ -42,6 +39,7 @@ h5,
 h6 {
   overflow-wrap: break-word;
 }
+
 #root,
 #__next {
   isolation: isolate;
@@ -62,14 +60,14 @@ ul {
 }
 
 @font-face {
-  font-family: Montserrat;
-  src: url(../fonts/Montserrat-Regular.ttf);
+  font-family: "Montserrat";
+  src: url("../fonts/Montserrat-Regular.ttf") format("truetype");
   font-weight: normal;
 }
 
 @font-face {
-  font-family: "Montserrat Bold";
-  src: url(../fonts/Montserrat-Bold.ttf);
+  font-family: "Montserrat";
+  src: url("../fonts/Montserrat-Bold.ttf") format("truetype");
   font-weight: bold;
 }
 
@@ -78,6 +76,12 @@ ul {
   --alternative-font-color: #333;
   --main-background-color: #00aeff;
   --error-font-color: #ad0000;
+}
+
+.no-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .error {
@@ -94,6 +98,7 @@ ul {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   display: none;
   z-index: 10;
+  animation: slidein 0.2s;
 }
 
 .show {
@@ -102,6 +107,64 @@ ul {
 
 .svg {
   cursor: pointer;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: var(--main-font-color);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.message {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.message-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--alternative-font-color);
+  margin-bottom: 0.5rem;
+}
+
+.message-text {
+  font-size: 1.1rem;
+  color: var(--alternative-font-color);
+  margin-bottom: 1rem;
+}
+
+.message-date {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.delete-btn {
+  background-color: #b30e0e;
+  color: var(--main-font-color);
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+  background-color: #8e0c0c;
+}
+
+.delete-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(179, 14, 14, 0.2);
 }
 
 @media only screen and (min-width: 320px) and (max-width: 766px) {
@@ -118,8 +181,7 @@ ul {
     justify-content: center;
     font-size: 2rem;
     color: var(--main-font-color);
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding: 1rem 0;
     position: relative;
   }
 
@@ -135,7 +197,6 @@ ul {
     display: block;
     padding: 10px 15px;
     color: var(--alternative-font-color);
-    text-decoration: none;
     font-size: 1rem;
   }
 
@@ -156,7 +217,6 @@ ul {
       transform: translateY(-40px);
       opacity: 0.3;
     }
-
     to {
       transform: translateY(0);
       opacity: 1;
@@ -175,36 +235,30 @@ ul {
     font-weight: 400;
   }
 
-  .sign-up-btn {
+  .sign-up-btn,
+  .new-message-btn,
+  .logout-btn {
     font-size: 1.2rem;
     padding: 1rem;
-    background-color: var(--main-background-color);
     color: var(--main-font-color);
     font-weight: bold;
     border-radius: 12px;
-    font-family: "Montserrat Bold";
+    background-color: var(--main-background-color);
+    font-family: "Montserrat";
+    text-align: center;
+  }
+
+  .go-to-messages {
+    background-color: #0b6601;
   }
 
   .login-btn {
     color: #2231ff;
     font-weight: bold;
-    font-family: "Montserrat Bold";
-  }
-
-  .new-message-btn {
-    background-color: var(--main-background-color);
-    color: var(--main-font-color);
-    font-weight: bold;
-    font-family: "Montserrat Bold";
-    padding: 1rem;
-    border-radius: 12px;
+    font-family: "Montserrat";
   }
 
   .logout-btn {
-    font-family: "Montserrat Bold";
-    padding: 1rem;
-    border-radius: 12px;
-    color: var(--main-font-color);
     background-color: #b30e0e;
   }
 
@@ -215,7 +269,7 @@ ul {
     padding: 1rem;
     background: var(--main-font-color);
     border-radius: 8px;
-    box-shadow: -1px 9px 17px 0px rgba(194, 194, 194, 1);
+    box-shadow: -1px 9px 17px rgba(194, 194, 194, 1);
   }
 
   .form-label {
@@ -243,7 +297,6 @@ ul {
 
   textarea.form-input {
     min-height: 10rem;
-    resize: none;
   }
 
   .submit-btn {
@@ -265,5 +318,27 @@ ul {
   .submit-btn:focus {
     outline: none;
     box-shadow: 0 0 0 2px rgba(0, 174, 255, 0.2);
+  }
+
+  .messages {
+    width: 90%;
+    padding: 0.5rem;
+  }
+
+  .message {
+    padding: 0.75rem;
+  }
+
+  .message-title {
+    font-size: 1.25rem;
+  }
+
+  .message-text {
+    font-size: 1rem;
+  }
+
+  .delete-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
   }
 }

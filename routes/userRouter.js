@@ -24,11 +24,12 @@ userRouter.get("/login", userController.getLoginForm);
 userRouter.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/",
+    successRedirect: "/browse-messages",
     failureRedirect: "/login",
-    failureFlash: true,
   })
 );
+
+userRouter.get("/browse-messages", userController.getBrowseMessages);
 
 userRouter.get("/logout", userController.getLogout);
 
@@ -57,7 +58,7 @@ userRouter.post(
 );
 
 userRouter.post(
-  "/:id/delete",
+  "/messages/:id/delete",
   checkAuthenticated,
   checkAdmin,
   userController.postDeleteMessage

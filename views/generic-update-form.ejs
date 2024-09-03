@@ -10,8 +10,8 @@
     <div class="container">
       <%- include('partials/header') %>
       <main class="main">
-        <form class="message-form" action="<%= action %>
-          method="post"> <% if (errors) { %>
+        <form class="message-form" action="<%=action%>" method="post">
+          <% if (errors) { %>
           <ul class="error-list">
             <% errors.forEach(error => { %>
             <li class="error"><%= error.msg %></li>

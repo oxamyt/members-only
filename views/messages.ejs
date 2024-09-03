@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Messages</title>
+    <link rel="stylesheet" href="/stylesheets/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <%- include('partials/header') %>
+      <main class="main">
+        <section class="messages">
+          <% if (messages && messages.length > 0) { %> <%
+          messages.forEach(message => { %>
+          <div class="message">
+            <h2 class="message-title"><%= message.title %></h2>
+            <p class="message-text"><%= message.text %></p>
+            <p class="message-date">
+              <% if (user && (user.membership_status || user.is_admin) ) { %>
+              <%= new Date(message.timestamp).toLocaleString() %> <% } else {
+              %>Time: Unknown <% } %>
+            </p>
+
+            <% if (user && (user.membership_status || user.is_admin)) { %>
+            <p class="message-author">Author: <%= message.author %></p>
+            <% } else { %>
+            <p class="message-author">Author: Anonymous</p>
+            <% } %> <% if (user && user.is_admin) { %>
+            <form action="/messages/<%= message.id %>/delete" method="POST">
+              <button type="submit" class="delete-btn">Delete</button>
+            </form>
+            <% } %>
+          </div>
+          <% }) %> <% } else { %>
+          <div class="no-message">No messages to display, create one!</div>
+          <a class="new-message-btn" href="/new-message">Create new message</a>
+          <% } %>
+        </section>
+      </main>
+    </div>
+    <script src="./javascript/dropdown.js" defer></script>
+  </body>
+</html>

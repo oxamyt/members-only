@@ -13,12 +13,18 @@
         <% if (user) { %>
         <section class="welcome">
           <h1 class="heading">Welcome back <%= user.username %></h1>
+          <a class="new-message-btn go-to-messages" href="/browse-messages"
+            >Browse messages</a
+          >
           <a class="new-message-btn" href="/new-message">Create new message</a>
           <a class="logout-btn" href="/logout">Log Out</a>
         </section>
         <% } else { %>
         <section class="welcome">
           <h1 class="heading">Welcome to Members Only!</h1>
+          <a class="new-message-btn go-to-messages" href="/browse-messages"
+            >Browse messages</a
+          >
           <a class="sign-up-btn" href="/sign-up">Sign Up</a>
           <p class="welcome-text">
             Already have an account?

@@ -22,6 +22,15 @@ async function getHomepage(req, res) {
   }
 }
 
+async function getBrowseMessages(req, res) {
+  try {
+    const messages = await db.getMessages();
+    res.render("messages", { user: req.user, messages: messages });
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 async function getSignUpForm(req, res) {
   res.render("sign-up-form", {
     first_name: "",
@@ -116,7 +125,7 @@ async function postDeleteMessage(req, res) {
 
   try {
     await db.deleteMessageById(id);
-    res.redirect("/");
+    res.redirect("/messages");
   } catch (err) {
     handleError(res, err);
   }
@@ -166,4 +175,5 @@ module.exports = {
   postDeleteMessage,
   getAdminStatus,
   postAdminStatus,
+  getBrowseMessages,
 };
