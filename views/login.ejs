@@ -4,14 +4,38 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
+    <link rel="stylesheet" href="/stylesheets/styles.css" />
   </head>
   <body>
-    <form action="/login" method="post">
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username" />
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" />
-      <button type="submit">Login</button>
-    </form>
+    <div class="container">
+      <%- include('partials/header') %>
+      <main class="main">
+        <form class="message-form" action="/login" method="post">
+          <% if (!user) { %>
+          <h1 class="heading">Please Login firstly</h1>
+          <% } %>
+          <label class="form-label" for="username">Username:</label>
+          <input
+            class="form-input"
+            type="text"
+            id="username"
+            name="username"
+            required
+          />
+
+          <label class="form-label" for="password">Password:</label>
+          <input
+            class="form-input"
+            type="password"
+            id="password"
+            name="password"
+            required
+          />
+
+          <button class="submit-btn" type="submit">Login</button>
+        </form>
+      </main>
+    </div>
+    <script src="./javascript/dropdown.js" defer></script>
   </body>
 </html>

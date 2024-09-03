@@ -3,15 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Update Membership Status</title>
+    <title><%= title %></title>
     <link rel="stylesheet" href="/stylesheets/styles.css" />
   </head>
   <body>
     <div class="container">
       <%- include('partials/header') %>
       <main class="main">
-        <form class="message-form" action="/update-membership" method="post">
-          <% if (errors) { %>
+        <form class="message-form" action="<%= action %>
+          method="post"> <% if (errors) { %>
           <ul class="error-list">
             <% errors.forEach(error => { %>
             <li class="error"><%= error.msg %></li>
@@ -28,7 +28,7 @@
             required
           />
 
-          <button class="submit-btn" type="submit">Submit</button>
+          <button class="submit-btn" type="submit"><%= title %></button>
         </form>
       </main>
     </div>

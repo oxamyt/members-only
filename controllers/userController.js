@@ -54,7 +54,7 @@ async function postSignUpForm(req, res) {
 }
 
 async function getLoginForm(req, res) {
-  res.render("login");
+  res.render("login", { user: req.user });
 }
 
 async function getLogout(req, res, next) {
@@ -65,15 +65,25 @@ async function getLogout(req, res, next) {
 }
 
 async function getMembershipForm(req, res) {
-  res.render("update-membership", { errors: [] });
+  res.render("generic-update-form", {
+    errors: [],
+    title: "Update Membership Status",
+    action: "/update-membership",
+  });
 }
 
 async function postMembershipForm(req, res) {
   const { passcode } = req.body;
 
   if (passcode !== process.env.SECRET_PASSCODE) {
-    return res.status(400).render("update-membership", {
-      errors: [{ msg: "Incorrect passcode." }],
+    return res.status(400).render("generic-update-form", {
+      errors: [
+        {
+          msg: "Incorrect passcode.",
+          title: "Update Membership Status",
+          action: "/update-membership",
+        },
+      ],
     });
   }
 
@@ -113,15 +123,25 @@ async function postDeleteMessage(req, res) {
 }
 
 async function getAdminStatus(req, res) {
-  res.render("update-admin", { errors: [] });
+  res.render("generic-update-form", {
+    errors: [],
+    title: "Update Admin Status",
+    action: "/update-admin",
+  });
 }
 
 async function postAdminStatus(req, res) {
   const { passcode } = req.body;
 
   if (passcode !== process.env.SECRET_ADMIN_PASSCODE) {
-    return res.status(400).render("update-admin", {
-      errors: [{ msg: "Incorrect passcode." }],
+    return res.status(400).render("generic-update-form", {
+      errors: [
+        {
+          msg: "Incorrect passcode.",
+          title: "Update Admin Status",
+          action: "/update-admin",
+        },
+      ],
     });
   }
 
