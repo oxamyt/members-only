@@ -125,7 +125,7 @@ async function postDeleteMessage(req, res) {
 
   try {
     await db.deleteMessageById(id);
-    res.redirect("/messages");
+    res.redirect("/browse-messages");
   } catch (err) {
     handleError(res, err);
   }

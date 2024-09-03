@@ -109,6 +109,22 @@ ul {
   cursor: pointer;
 }
 
+.footer-svg {
+  width: 2rem;
+}
+
+.footer,
+.author {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.author {
+  font-size: 0.5rem;
+}
+
 .messages {
   display: flex;
   flex-direction: column;
@@ -167,7 +183,28 @@ ul {
   box-shadow: 0 0 0 2px rgba(179, 14, 14, 0.2);
 }
 
-@media only screen and (min-width: 320px) and (max-width: 766px) {
+.header-section:hover {
+  color: var(--alternative-font-color);
+  transition: 0.5s;
+}
+
+.new-message-btn:hover,
+.sign-up-btn:hover {
+  background-color: #70d0fd;
+  transition: 0.5s;
+}
+
+.logout-btn:hover {
+  background-color: #fe0303;
+  transition: 0.5s;
+}
+
+.go-to-messages:hover {
+  background-color: #15a804;
+  transition: 0.5s;
+}
+
+@media only screen and (max-width: 766px) {
   .container {
     display: grid;
     grid-template-rows: auto 1fr;
@@ -340,5 +377,336 @@ ul {
   .delete-btn {
     padding: 0.4rem 0.8rem;
     font-size: 0.9rem;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .container {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100vh;
+  }
+
+  .header {
+    background: linear-gradient(#2eafc3, #43b6c8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--main-font-color);
+    padding: 1rem 0;
+    position: relative;
+  }
+
+  .header-section {
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+  }
+
+  .dropdown-item {
+    display: block;
+    padding: 10px 15px;
+    color: var(--alternative-font-color);
+    font-size: 1rem;
+  }
+
+  .svg {
+    margin-left: auto;
+    width: 3rem;
+  }
+
+  .main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: slidein 0.4s;
+  }
+
+  .welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .heading {
+    font-size: 1.5rem;
+    font-weight: 400;
+  }
+
+  .sign-up-btn,
+  .new-message-btn,
+  .logout-btn {
+    font-size: 1.2rem;
+    padding: 1rem;
+    color: var(--main-font-color);
+    font-weight: bold;
+    border-radius: 12px;
+    background-color: var(--main-background-color);
+    font-family: "Montserrat";
+    text-align: center;
+  }
+
+  .go-to-messages {
+    background-color: #0b6601;
+  }
+
+  .login-btn {
+    color: #2231ff;
+    font-weight: bold;
+    font-family: "Montserrat";
+  }
+
+  .logout-btn {
+    background-color: #b30e0e;
+  }
+
+  .message-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 80%;
+    padding: 1rem;
+    background: var(--main-font-color);
+    border-radius: 8px;
+    box-shadow: -1px 9px 17px rgba(194, 194, 194, 1);
+  }
+
+  .form-label {
+    font-size: 1rem;
+    color: var(--alternative-font-color);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .form-input {
+    font-size: 1rem;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .form-input:focus {
+    border-color: var(--main-background-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 174, 255, 0.2);
+  }
+
+  textarea.form-input {
+    min-height: 10rem;
+  }
+
+  .submit-btn {
+    background-color: var(--main-background-color);
+    color: var(--main-font-color);
+    border: none;
+    border-radius: 4px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .submit-btn:hover {
+    background-color: var(--main-background-color);
+  }
+
+  .submit-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 174, 255, 0.2);
+  }
+
+  .messages {
+    width: 90%;
+    padding: 0.5rem;
+  }
+
+  .message {
+    padding: 0.75rem;
+  }
+
+  .message-title {
+    font-size: 1.25rem;
+  }
+
+  .message-text {
+    font-size: 1rem;
+  }
+
+  .delete-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media only screen and (min-width: 1025px) {
+  .container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    height: 100vh;
+  }
+
+  .header {
+    background: linear-gradient(#2eafc3, #43b6c8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: var(--main-font-color);
+    padding: 1.5rem 2rem;
+    position: relative;
+  }
+
+  .header-section {
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+  }
+
+  .dropdown-item {
+    display: block;
+    padding: 15px 20px;
+    color: var(--alternative-font-color);
+    font-size: 1.2rem;
+  }
+
+  .svg {
+    margin-left: auto;
+    width: 4rem;
+  }
+
+  .main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: slidein 0.4s;
+  }
+
+  .welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .heading {
+    font-size: 2rem;
+    font-weight: 400;
+  }
+
+  .sign-up-btn,
+  .new-message-btn,
+  .logout-btn {
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+    color: var(--main-font-color);
+    font-weight: bold;
+    border-radius: 12px;
+    background-color: var(--main-background-color);
+    font-family: "Montserrat";
+    text-align: center;
+  }
+
+  .go-to-messages {
+    background-color: #0b6601;
+  }
+
+  .login-btn {
+    color: #2231ff;
+    font-weight: bold;
+    font-family: "Montserrat";
+  }
+
+  .logout-btn {
+    background-color: #b30e0e;
+  }
+
+  .message-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 50%;
+    padding: 1.5rem;
+    background: var(--main-font-color);
+    border-radius: 8px;
+    box-shadow: -1px 9px 17px rgba(194, 194, 194, 1);
+  }
+
+  .form-label {
+    font-size: 1.2rem;
+    color: var(--alternative-font-color);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .form-input {
+    font-size: 1.2rem;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .form-input:focus {
+    border-color: var(--main-background-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 174, 255, 0.2);
+  }
+
+  textarea.form-input {
+    min-height: 12rem;
+  }
+
+  .submit-btn {
+    background-color: var(--main-background-color);
+    color: var(--main-font-color);
+    border: none;
+    border-radius: 4px;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .submit-btn:hover {
+    background-color: var(--main-background-color);
+  }
+
+  .submit-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 174, 255, 0.2);
+  }
+
+  .messages {
+    width: 80%;
+    padding: 1rem;
+  }
+
+  .message {
+    padding: 1rem;
+  }
+
+  .message-title {
+    font-size: 1.5rem;
+  }
+
+  .message-text {
+    font-size: 1.1rem;
+  }
+
+  .delete-btn {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
   }
 }

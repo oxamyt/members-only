@@ -1,23 +1,27 @@
-<% if (messages && messages.length > 0) { %>
-<ul>
-  <% messages.forEach(message => { %>
-  <li>
-    <p><%= message.title %></p>
-    <p><%= message.text %></p>
-    <p>
-      <% if (user && (user.membership_status || user.is_admin) ) { %> By: <%=
-      message.author %> on <%= message.timestamp.toLocaleString() %> <% } else {
-      %> By: Anonymous on Unknown time <% } %>
+<section class="messages">
+  <% if (messages && messages.length > 0) { %> <% messages.forEach(message => {
+  %>
+  <div class="message">
+    <h2 class="message-title"><%= message.title %></h2>
+    <p class="message-text"><%= message.text %></p>
+    <p class="message-date">
+      <% if (user && (user.membership_status || user.is_admin) ) { %> <%= new
+      Date(message.timestamp).toLocaleString() %> <% } else { %>Time: Unknown <%
+      } %>
     </p>
 
-    <% if (user && user.is_admin) { %>
-    <form action="/<%= message.id %>/delete" method="post">
-      <button type="submit">Delete message</button>
+    <% if (user && (user.membership_status || user.is_admin)) { %>
+    <p class="message-author">Author: <%= message.author %></p>
+    <% } else { %>
+    <p class="message-author">Author: Anonymous</p>
+    <% } %> <% if (user && user.is_admin) { %>
+    <form action="/messages/<%= message.id %>/delete" method="POST">
+      <button type="submit" class="delete-btn">Delete</button>
     </form>
     <% } %>
-  </li>
-  <% }) %>
-</ul>
-<% } else { %>
-<p>No messages found.</p>
-<% } %>
+  </div>
+  <% }) %> <% } else { %>
+  <div class="no-message">No messages to display, create one!</div>
+  <a class="new-message-btn" href="/new-message">Create new message</a>
+  <% } %>
+</section>
