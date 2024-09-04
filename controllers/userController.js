@@ -89,10 +89,10 @@ async function postMembershipForm(req, res) {
       errors: [
         {
           msg: "Incorrect passcode.",
-          title: "Update Membership Status",
-          action: "/update-membership",
         },
       ],
+      title: "Update Membership Status",
+      action: "/update-membership",
     });
   }
 
@@ -147,10 +147,10 @@ async function postAdminStatus(req, res) {
       errors: [
         {
           msg: "Incorrect passcode.",
-          title: "Update Admin Status",
-          action: "/update-admin",
         },
       ],
+      title: "Update Admin Status",
+      action: "/update-admin",
     });
   }
 

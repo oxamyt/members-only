@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
     <link rel="stylesheet" href="/stylesheets/styles.css" />
+    <link rel="icon" type="image/x-icon" href="/images/icon.png" />
   </head>
   <body>
     <div class="container">
@@ -13,6 +14,10 @@
         <form class="message-form" action="/login" method="post">
           <% if (!user) { %>
           <h1 class="heading">Please Login firstly</h1>
+          <p class="welcome-text">
+            Don't have an account?
+            <a class="login-btn" href="/sign-up">Sign up here</a>
+          </p>
           <% } %>
           <label class="form-label" for="username">Username:</label>
           <input
