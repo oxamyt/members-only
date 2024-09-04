@@ -41,4 +41,9 @@ This project is a simple private club messaging system where users can sign up, 
    - Admin users have the ability to delete messages.
 
 4. **Visibility Rules**:
+
    - Messages are visible to all, but author details and timestamps are only visible to members.
+
+5. **DEPLOY**:
+
+   - Live: https://members-only-production-9359.up.railway.app/
